@@ -1,0 +1,10 @@
+"AddonInfo"
+{
+addonSteamAppID "550"
+addontitle "Leveling system"
+addonversion "1"
+addonauthor "암흑에돌진"
+addonauthorSteamID "https://steamcommunity.com/id/meckin0202/"
+addonURL0 ""
+addonDescription "SI controller + Tank spawner + Notification+Saferoom healing"
+}
