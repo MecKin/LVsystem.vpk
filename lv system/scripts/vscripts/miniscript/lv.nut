@@ -521,7 +521,7 @@ Vars.toggleread <- function() //토글 커맨드
 }
 
 Vars.toggleread();
-function ChatTriggers::boss ( player, args, text ) // 채팅 커맨드 구성성
+function ChatTriggers::boss ( player, args, text ) // 채팅 커맨드 구성
 {
 	 local listenhost = player.IsServerHost();
 	 if(listenhost == true)
@@ -546,7 +546,7 @@ function ChatTriggers::boss ( player, args, text ) // 채팅 커맨드 구성성
 	return 0;
 }
 
-function ChatTriggers::hp ( player, args, text ) // 채팅 커맨드 구성성
+function ChatTriggers::hp ( player, args, text ) // 채팅 커맨드 구성
 {
 	 local listenhost = player.IsServerHost();
 	 if(listenhost == true)
