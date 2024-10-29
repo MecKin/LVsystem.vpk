@@ -139,7 +139,7 @@ Vars.LVsystemSave <- function () // 파일쓰기
 }
 
 
-function ChatTriggers::time ( player, args, text )
+function ChatTriggers::time ( player, args, text ) // 채팅 커맨드 구성
 {
               local listenhost = player.IsServerHost();
 	  if(listenhost == true)
@@ -158,7 +158,7 @@ function ChatTriggers::time ( player, args, text )
 	  return 0;
 }
 
-function ChatTriggers::max ( player, args, text )
+function ChatTriggers::max ( player, args, text ) // 채팅 커맨드 구성
 {
               local listenhost = player.IsServerHost();
 	  if(listenhost == true)
@@ -185,7 +185,7 @@ function ChatTriggers::max ( player, args, text )
 	  return 0;
 }
 
-function ChatTriggers::domi ( player, args, text )
+function ChatTriggers::domi ( player, args, text ) // 채팅 커맨드 구성
 {
       local listenhost = player.IsServerHost();
 	  if(listenhost == true)
@@ -203,7 +203,7 @@ function ChatTriggers::domi ( player, args, text )
 	  return 0;
 }
 
-function ChatTriggers::hardfour ( player, args, text )
+function ChatTriggers::hardfour ( player, args, text ) // 채팅 커맨드 구성
 {
       local listenhost = player.IsServerHost();
 	  if(listenhost == true)
@@ -226,7 +226,7 @@ function ChatTriggers::hardfour ( player, args, text )
 	  return 0;
 }
 
-function ChatTriggers::hardsix ( player, args, text )
+function ChatTriggers::hardsix ( player, args, text ) // 채팅 커맨드 구성
 {
       local listenhost = player.IsServerHost();
 	  if(listenhost == true)
@@ -249,7 +249,7 @@ function ChatTriggers::hardsix ( player, args, text )
 	  return 0;
 }
 
-function ChatTriggers::hardeight ( player, args, text )
+function ChatTriggers::hardeight ( player, args, text ) // 채팅 커맨드 구성
 {
       local listenhost = player.IsServerHost();
 	  if(listenhost == true)
@@ -272,14 +272,14 @@ function ChatTriggers::hardeight ( player, args, text )
 	  return 0;
 }
 
-function ChatTriggers::info ( player, args, text )
+function ChatTriggers::info ( player, args, text ) // 채팅 커맨드 구성
 {
       ClientPrint(null,5,"\x04Max specials"+"\x01 : "+"\x05"+Vars.max+"\x04 Respawn time"+"\x01 : "+"\x05"+Vars.interval+"\x04 Max dominators"+"\x01 : "+"\x05"+Vars.domi);
       if(Vars.tankspawnerToF == "true")
       ClientPrint(null,5,"\x04Tank"+"\x01 : "+"\x05"+Vars.spawnguage+"\x05%");
 }
 
-function Notifications::OnPostSpawn::levelconfirm(player, params)
+function Notifications::OnPostSpawn::levelconfirm(player, params) //플레이어가 들어왔을 때 세팅 로드
 {
     if(player.GetType() == Z_SURVIVOR && player.IsHuman())
     {
@@ -288,14 +288,14 @@ function Notifications::OnPostSpawn::levelconfirm(player, params)
     }
 }
 
-function Notifications::OnSurvivorsLeftStartArea::NotifyEveryoneGameStart ( )
+function Notifications::OnSurvivorsLeftStartArea::NotifyEveryoneGameStart ( ) // 게임 시작 시 소리+세팅 알림
 {
       ClientPrint(null,5"\x01GAME START!");
       Utils.PlaySoundToAll("Hint.Critical");
       ClientPrint(null,5,"\x04Max specials"+"\x01 : "+"\x05"+Vars.max+"\x04 Respawn time"+"\x01 : "+"\x05"+Vars.interval+"\x04 Max dominators"+"\x01 : "+"\x05"+Vars.domi);
 }
 
-Vars.SIlimit <- function ()
+Vars.SIlimit <- function () // 몹 테이블
 {
 			  if(Vars.max > 6 && Vars.max < 13)
 			  {
@@ -342,7 +342,7 @@ Vars.SIlimit <- function ()
 	        return 0;
 }
 
-Vars.Domilimit <- function()
+Vars.Domilimit <- function() // 몹 테이블 
 {
 		 if(Vars.domi == 0)
 			  {
@@ -399,7 +399,7 @@ Vars.Domilimit <- function()
 }
 
 
-function Notifications::OnSurvivorsLeftStartArea::TankspawnScriptStart ( )
+function Notifications::OnSurvivorsLeftStartArea::TankspawnScriptStart ( ) // 게임 시작 시 탱크 스크립트 시작
 {       
        Timers.AddTimerByName("TsTimer", 4.0, true, CountingTankspawn, Players.RandomAliveSurvivor() );
        if(Vars.tankspawnerToF == "true" && Vars.tankspawncheck == "false")
@@ -408,7 +408,7 @@ function Notifications::OnSurvivorsLeftStartArea::TankspawnScriptStart ( )
       return 0;
 }
 
-::CountingTankspawn <- function (player)
+::CountingTankspawn <- function (player) // 탱크 스크립트 타이머
 {            
          Vars.tankcount++;
          Vars.spawnguage = Vars.tankcount / 4;
@@ -422,7 +422,7 @@ function Notifications::OnSurvivorsLeftStartArea::TankspawnScriptStart ( )
          return 0;
 }
 
-::Tankspawner <- function ( player )
+::Tankspawner <- function ( player )  // 탱크 스크립트 소환 코드
 {        
          Vars.counttankspawncheck = "false";
          Vars.countdown++;
@@ -462,20 +462,20 @@ function Notifications::OnSurvivorsLeftStartArea::TankspawnScriptStart ( )
          return 0;
 }
 
-function Notifications::OnDeath::TankRagecount (victim, attacker, params )
+function Notifications::OnDeath::TankRagecount (victim, attacker, params ) // 탱크 스크립트가 작동하기 위해 몹이 처치될 때마다 카운트트 
 {
                if ( attacker.GetType() == SURVIVOR && victim.GetType() == Z_INFECTED && Vars.tankspawnerToF == "true" ) 
                Vars.tankcount++;
 }
 
-function Notifications::OnFinaleRadioStart::TimerstopwhenFinal ( params )
+function Notifications::OnFinaleRadioStart::TimerstopwhenFinal ( params ) // 피날레 시작 시 타이머 죽이기
 {
              Timers.RemoveTimerByName("TsTimer");
 	 SessionOptions.cm_ProhibitBosses <- false;
 	 SessionOptions.ProhibitBosses <- false;
 }
 
-function Notifications::OnTankSpawned::Timerstopwhentankspawn (tank, params )
+function Notifications::OnTankSpawned::Timerstopwhentankspawn (tank, params ) // 탱크가 스폰될 시 타이머 죽이기
 { 
               Vars.counttankspawncheck = "false";
 	  Vars.tankspawncheck  = "true";
@@ -486,7 +486,7 @@ function Notifications::OnTankSpawned::Timerstopwhentankspawn (tank, params )
               delete Notifications.OnDeath.TankRagecount;
 }
 
-function Notifications::OnGeneratorStart::TimerstopwhenGenertatorOn ( params )
+function Notifications::OnGeneratorStart::TimerstopwhenGenertatorOn ( params ) // 피날레 시작 시 타이머 죽이기
 {
              Timers.RemoveTimerByName("TsTimer");
 	 SessionOptions.cm_ProhibitBosses <- false;
@@ -494,7 +494,7 @@ function Notifications::OnGeneratorStart::TimerstopwhenGenertatorOn ( params )
 }
 
 
-function ChatTriggers::tank ( player, args, text )
+function ChatTriggers::tank ( player, args, text )  // 채팅 커맨드 구성
 {
        if(Vars.spawnguage < 100 && Vars.counttankspawncheck == "true" && Vars.tankspawnerToF  == "true") //스크립트 작동중
        ClientPrint(null,5,"\x04Tank"+"\x01 : "+"\x05"+Vars.spawnguage+"\x05%"+"\x01, Tank will spawn at 100%.");
@@ -510,7 +510,7 @@ function ChatTriggers::tank ( player, args, text )
 }
 
 
-Vars.toggleread <- function()
+Vars.toggleread <- function() //토글 커맨드
 {
 	   local configspawner = FileToString(LVsystemSettingtankspawner.LVoptiontxt);
                Vars.tankspawnerToF <- configspawner;
@@ -521,7 +521,7 @@ Vars.toggleread <- function()
 }
 
 Vars.toggleread();
-function ChatTriggers::boss ( player, args, text )
+function ChatTriggers::boss ( player, args, text ) // 채팅 커맨드 구성성
 {
 	 local listenhost = player.IsServerHost();
 	 if(listenhost == true)
@@ -546,7 +546,7 @@ function ChatTriggers::boss ( player, args, text )
 	return 0;
 }
 
-function ChatTriggers::hp ( player, args, text )
+function ChatTriggers::hp ( player, args, text ) // 채팅 커맨드 구성성
 {
 	 local listenhost = player.IsServerHost();
 	 if(listenhost == true)
@@ -572,7 +572,7 @@ function ChatTriggers::hp ( player, args, text )
 	return 0;
 }
 
-function Notifications::OnEnterSaferoom::SurvivorsEnterSaferoom (player, params)
+function Notifications::OnEnterSaferoom::SurvivorsEnterSaferoom (player, params) // 안전구역 진입 시 체력 회복
 {            
       local shp = player.GetRawHealth(); // 필 먹은거 낭비 안되게 함
       if(shp < 50 && Vars.checkpointheal == "true")
